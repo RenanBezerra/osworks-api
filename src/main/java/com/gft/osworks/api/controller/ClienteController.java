@@ -70,9 +70,11 @@ public class ClienteController {
 
 	@DeleteMapping("/{clienteId}")
 	public ResponseEntity<Void> excluir(@PathVariable Long clienteId) {
+		
 		if (!clienteRepository.existsById(clienteId)) {
 			return ResponseEntity.notFound().build();
 		}
+		
 
 		cadastroClienteService.excluir(clienteId);
 		return ResponseEntity.noContent().build();
