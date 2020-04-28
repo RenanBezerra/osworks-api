@@ -1,7 +1,7 @@
 package com.gft.osworks.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,8 +26,7 @@ public class OrdemServico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	
+
 	@Valid
 	@ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class)
 	@NotNull
@@ -36,19 +35,19 @@ public class OrdemServico {
 
 	@NotBlank
 	private String descricao;
-	
+
 	@NotNull
 	private BigDecimal preco;
-	
+
 	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private statusOrdemServico status;
-	
-	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime dataAbertura;
 
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime dataFinalizacao;
+	private OffsetDateTime dataAbertura;
+
+	@JsonProperty(access = Access.READ_ONLY)
+	private OffsetDateTime dataFinalizacao;
 
 	public Long getId() {
 		return id;
@@ -90,20 +89,20 @@ public class OrdemServico {
 		this.status = status;
 	}
 
-	public LocalDateTime getDataAbertura() {
+	public OffsetDateTime getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(LocalDateTime dataAbertura) {
+	public void setDataAbertura(OffsetDateTime dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public LocalDateTime getDataFinalizacaoDateTime() {
+	public OffsetDateTime getDataFinalizacao() {
 		return dataFinalizacao;
 	}
 
-	public void setDataFinalizacaoDateTime(LocalDateTime dataFinalizacaoDateTime) {
-		this.dataFinalizacao = dataFinalizacaoDateTime;
+	public void setDataFinalizacao(OffsetDateTime dataFinalizacao) {
+		this.dataFinalizacao = dataFinalizacao;
 	}
 
 	@Override
