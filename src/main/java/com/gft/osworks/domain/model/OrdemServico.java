@@ -9,7 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -29,7 +28,7 @@ public class OrdemServico {
 	private statusOrdemServico status;
 	
 	private LocalDateTime dataAbertura;
-	private LocalDateTime dataFinalizacaoDateTime;
+	private LocalDateTime dataFinalizacao;
 
 	public Long getId() {
 		return id;
@@ -80,11 +79,11 @@ public class OrdemServico {
 	}
 
 	public LocalDateTime getDataFinalizacaoDateTime() {
-		return dataFinalizacaoDateTime;
+		return dataFinalizacao;
 	}
 
 	public void setDataFinalizacaoDateTime(LocalDateTime dataFinalizacaoDateTime) {
-		this.dataFinalizacaoDateTime = dataFinalizacaoDateTime;
+		this.dataFinalizacao = dataFinalizacaoDateTime;
 	}
 
 	@Override
