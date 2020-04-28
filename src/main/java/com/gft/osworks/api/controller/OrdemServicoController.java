@@ -2,6 +2,7 @@ package com.gft.osworks.api.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -37,13 +38,13 @@ public class OrdemServicoController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public OrdemServico criar(@Valid @RequestBody OrdemServico ordemServico) {
-		return gestaoOrdemServicoService.criar(ordemServico);
+	public OrdemServicoModel criar(@Valid @RequestBody OrdemServico ordemServico) {
+		return toModel(gestaoOrdemServicoService.criar(ordemServico));
 	}
 	
 	@GetMapping
-	public List<OrdemServico> listar(){
-		return ordemServicoRepository.findAll();
+	public List<OrdemServicoModel> listar(){
+		return toCollectionModel(ordemServicoRepository.findAll());
 	}
 	
 	@GetMapping("/{ordemServicoId}")
@@ -51,13 +52,21 @@ public class OrdemServicoController {
 		Optional<OrdemServico> ordemServico = ordemServicoRepository.findById(ordemServicoId);
 		
 		if(ordemServico.isPresent()) {
-			OrdemServicoModel ordemServicoModel = modelMapper.map(ordemServico.get(), OrdemServicoModel.class);
+			OrdemServicoModel ordemServicoModel = toModel(ordemServico.get());
 			return ResponseEntity.ok(ordemServicoModel);
 		}
 		return ResponseEntity.notFound().build();
-		
-		
 	}
+	
+		private OrdemServicoModel toModel(OrdemServico ordemServico) {
+			return modelMapper.map(ordemServico, OrdemServicoModel.class);
+		}
+	
+		private List<OrdemServicoModel> toCollectionModel(List<OrdemServico> ordenServico){
+			return ordenServico.stream()
+					.map(ordemServico -> toModel(ordemServico))
+					.collect(Collectors.toList());
+		}
 	
 	
 }
