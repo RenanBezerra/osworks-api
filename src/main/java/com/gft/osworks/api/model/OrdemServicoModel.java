@@ -8,7 +8,7 @@ import com.gft.osworks.domain.model.statusOrdemServico;
 public class OrdemServicoModel {
 	
 	private Long id;
-	private String nomeCliente;
+	private ClienteResumoModel cliente;
 	private String descricao;
 	private BigDecimal preco;
 	private statusOrdemServico status;
@@ -20,12 +20,12 @@ public class OrdemServicoModel {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	} 
+	public ClienteResumoModel getCliente() {
+		return cliente;
 	}
-	public String getNomeCliente() {
-		return nomeCliente;
-	}
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
+	public void setCliente(ClienteResumoModel cliente) {
+		this.cliente = cliente;
 	}
 	public String getDescricao() {
 		return descricao;
