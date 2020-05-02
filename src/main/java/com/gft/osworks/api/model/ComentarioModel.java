@@ -4,14 +4,14 @@ import java.time.OffsetDateTime;
 
 public class ComentarioModel {
 
-	private Long idLong;
+	private Long id;
 	private String descricao;
 	private OffsetDateTime dataEnvio;
 	public Long getIdLong() {
-		return idLong;
+		return id;
 	}
 	public void setIdLong(Long idLong) {
-		this.idLong = idLong;
+		this.id = idLong;
 	}
 	public String getDescricao() {
 		return descricao;

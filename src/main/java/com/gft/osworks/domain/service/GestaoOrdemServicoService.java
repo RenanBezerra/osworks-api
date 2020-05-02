@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gft.osworks.api.model.Comentario;
+import com.gft.osworks.domain.exception.EntidadeNaoEncontradaException;
 import com.gft.osworks.domain.exception.NegocioException;
 import com.gft.osworks.domain.model.Cliente;
 import com.gft.osworks.domain.model.OrdemServico;
@@ -39,7 +40,7 @@ public class GestaoOrdemServicoService {
 	
 	public Comentario adicionarComentario(Long ordemServicoId, String descricao) {
 		OrdemServico ordemServico = ordemServicoRepository.findById(ordemServicoId)
-				.orElseThrow(()-> new NegocioException("Ordem de serviço não encontrada"));
+				.orElseThrow(()-> new EntidadeNaoEncontradaException("Ordem de serviço não encontrada"));
 		
 		Comentario comentario = new Comentario();
 		comentario.setDataEnvio(OffsetDateTime.now());

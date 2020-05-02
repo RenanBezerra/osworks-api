@@ -19,8 +19,10 @@ public class Comentario {
 	
 	@ManyToOne
 	private OrdemServico ordemServico;
+	
 	private String descricao;
 	private OffsetDateTime dataEnvio;
+	
 	public Long getId() {
 		return id;
 	}
