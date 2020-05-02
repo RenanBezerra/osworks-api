@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.gft.osworks.api.model.Comentario;
+import com.gft.osworks.domain.exception.NegocioException;
 
 @Entity
 public class OrdemServico {
@@ -128,6 +129,23 @@ public class OrdemServico {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	public boolean podeSerFinalizada() {
+		return statusOrdemServico.ABERTA.equals(getStatus());
+	}
+
+	public boolean naoPodeSerFinalizada() {
+		return !podeSerFinalizada(); 
+	}
+	public void finalizar() {
+
+		if(naoPodeSerFinalizada()) {
+			throw new NegocioException("Ordem de serviço não pode ser finalizada");
+		}
+		
+		setStatus(statusOrdemServico.FINALIZADA);
+		setDataFinalizacao(OffsetDateTime.now());
 	}
 
 }
